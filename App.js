@@ -10,9 +10,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider stores={stores} >
-        <Styleprovider style={getTheme(custom)}>
+        <StyleProvider style={getTheme(custom)}>
           <AppNavigator />
-        </Styleprovider>
+        </StyleProvider>
       </Provider>
     );
   }
