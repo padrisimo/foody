@@ -6,7 +6,7 @@ import {
   Icon,
   Text,
   Form
-} from 'react-native';
+} from 'native-base';
 import { observer } from 'mobx-react/native';
 import { observable } from 'mobx';
 
