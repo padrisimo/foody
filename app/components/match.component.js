@@ -31,7 +31,7 @@ class Match extends Component {
   markViewed(match) {
     this.props.stores.matches.markViewed(match[0]);
   }
-  renderCard() {
+  renderCard(post, store) {
     const postObj = post ? post[1] : null;
     if (postObj) {
       let pic = { uri: postObj.url };
@@ -43,7 +43,7 @@ class Match extends Component {
             {pic.uri != undefined && pic.uri != "" ? <Image style={styles.thumbnail} source={pic} /> : null}
           </CardItem>
           <CardItem>
-            <Text styles={styles.text}>{text}</Text>
+            <Text style={styles.text}>{text}</Text>
           </CardItem>
         </Card>
       )
