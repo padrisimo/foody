@@ -50,7 +50,7 @@ class Match extends Component {
     }
     return null;
   }
-  renderNoMoreCards(){
+  renderNoMoreCards() {
     return (
       <Card>
         <CardItem cardBody>
@@ -60,7 +60,30 @@ class Match extends Component {
     )
   }
   render() {
-    return null;
+    const { matches, auth } = this.props.stores;
+    const user = auth.authUser
+
+    const { _autoSubscriberFetching: fetching, _autoSbuscriberError: fetchError } = this.state;
+
+    if (fetchError) {
+      return <Text style={{ backgroundColor: "red" }}>{fetchError}</Text>
+    }
+    const postList = matches.getData('matches');
+    const list = postList ? postList.entries() : null;
+    return (
+      <View>
+        {fetching ? <Spinner /> :
+          <DeckSwiper
+            dataSource={list}
+            renderItem={(card) => this.renderCard(card, matches)}
+            renderEmpty={this.renderNoMoreCards.bind(this)}
+            looping={false}
+            onSwipeRight={(item) => this.markViewed(item)}
+            onSwipeLeft={(item)=> this.markViewed(item)}
+          />
+        }
+      </View>
+    );
   }
 };
 
