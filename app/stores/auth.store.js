@@ -1,20 +1,19 @@
-import { observable, action } from 'mobx';
+import {observable, action} from 'mobx';
 import firebase from 'firebase';
 
 export default class AuthStore {
-    @observable authUser = null;
+  @observable authUser = null;
 
-    constructor () {
-        firebase.auth().onAuthStateChange( user => {
-            this.authUser = user;
-        })        
+  constructor() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.authUser = user
+    })
+  }
+  @action
+  signIn({email, password}) {
+    if(this.authUser) {
+      return Promise.resolve(this.authUser)
     }
-    @action
-    signIn({email, password}){
-        if(this.authUser) {
-            return Promise.resolve(this.authUser)
-        }
-        return firebase.auth().signInWithEmailAndPassword(email, password)
-    }
-
-};
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+  }
+}
