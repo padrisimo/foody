@@ -16,7 +16,7 @@ export default class MatchStore extends MobxFirebaseStore {
     markViewed(post) {
         let updates = {};
         updates[`viewed/${this.user.uid}`] = true;
-        this.fb.child('posts').update(updates);
+        this.fb.child('posts').child(post).update(updates);
     }
     subs(){
         return [{

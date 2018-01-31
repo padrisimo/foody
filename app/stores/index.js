@@ -1,6 +1,6 @@
 import ConfigStore from './config.store';
 import AuthStore from './auth.store';
-import MatchStore from './match.stores';
+import MatchStore from './match.store';
 
 const config = new ConfigStore()
 const auth = new AuthStore()
