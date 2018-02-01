@@ -8,10 +8,11 @@ import {
   Text,
   Input,
   Card,
+  Item,
   CardItem,
   Spinner
 } from 'native-base';
-import { image } from 'react-native';
+import { Image } from 'react-native';
 import { inject } from 'mobx-react';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react/native';
@@ -40,15 +41,15 @@ export default class PostScreen extends Component {
   constructor(props) {
     super(props);
   }
-  static navigationOptions = ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerLeft: <Button transparent
       onPress={() => navigation.goBack(null)}>
-        <Icon name='chevron-left' style={{color: "#fff"}} size={28}/>
-      </Button>
+      <Icon name='chevron-left' style={{ color: "#fff" }} size={28} />
+    </Button>
   })
   componentDidMount() {
     ImagePicker.showImagePicker(options, (res) => {
-      this.image = {uri: res.uri}
+      this.image = { uri: res.uri }
       this.data = res
     })
   }
@@ -63,6 +64,33 @@ export default class PostScreen extends Component {
     })
   }
   render() {
-    return null;
+    return (
+      <Container>
+        <Content style={{ backgroundColor: "#858585" }}>
+          {this.uploading ? <Spinner /> : null}
+          <Card>
+            <CardItem cardBody>
+              {this.image ? <Image
+                style={{ height: 200, width: null, flex: 1 }}
+                source={this.image} /> : null}
+            </CardItem>
+            <CardItem>
+              <Form>
+                <Item bordertype='underline'>
+                  <Input style={{ color: 'black' }}
+                    placeholderTextColor='black'
+                    placeholder='Enter post test'
+                    onChangeText={(text) => this.text = text} />
+                </Item>
+                <Button rounded block
+                  onPress={this.post.bind(this)}>
+                  <Text>Share!</Text>
+                </Button>
+              </Form>
+            </CardItem>
+          </Card>
+        </Content>
+      </Container>
+    );
   }
 }
