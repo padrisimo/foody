@@ -7,7 +7,7 @@ const Blob = RNFetchBlob.polyfill.Blob;
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
 window.Blob = Blob;
 
-const base = 'post';
+const base = 'posts';
 
 export default class PostStore extends MobxFirebaseStore {
     constructor() {
@@ -32,7 +32,7 @@ export default class PostStore extends MobxFirebaseStore {
         let post = {
             text: text,
             created: Date.now(),
-            user: this.user.id,
+            user: this.user.uid,
             url: url
         }
         let key = this.fb.child(base).push().key

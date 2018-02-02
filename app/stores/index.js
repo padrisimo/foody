@@ -6,6 +6,6 @@ import PostStore from './post.store';
 const config = new ConfigStore()
 const auth = new AuthStore()
 const matches = new MatchStore()
-const post = new PostStore()
+const posts = new PostStore()
 
-export default { config, auth, matches, post };
+export default { config, auth, matches, posts };

@@ -1,6 +1,6 @@
 import { action } from 'mobx';
 import firebase from 'firebase';
-import MobxFirebaseStore from "mobx-firebase-store";
+import MobxFirebaseStore from 'mobx-firebase-store';
 
 export default class MatchStore extends MobxFirebaseStore {
     constructor(){

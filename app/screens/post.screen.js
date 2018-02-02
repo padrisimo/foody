@@ -76,7 +76,7 @@ export default class PostScreen extends Component {
             </CardItem>
             <CardItem>
               <Form>
-                <Item bordertype='underline'>
+                <Item borderType='underline'>
                   <Input style={{ color: 'black' }}
                     placeholderTextColor='black'
                     placeholder='Enter post test'
