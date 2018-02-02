@@ -1,10 +1,36 @@
 import React from 'react';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator, DrawerItems, NavigationActions } from 'react-navigation';
 import SplashScreen from './screens/splash.screen';
 import LoginScreen from './screens/login.screen';
 import MatchScreen from './screens/match.screen';
 import PostScreen from './screens/post.screen';
+import { ScrollView } from 'react-native';
+import { Button, Icon } from 'native-base';
 
+const hiddenItems = [
+    'Splash',
+    'Login'
+];
+
+const MenuButton = ({ navigate }) => (
+    <Button transparent
+        onPress={() => {
+            navigate('DrawerOpen')
+        }} >
+        <Icon style={{color: "#fff"}} size={28} name="menu"/>
+    </Button>
+)
+const SideBar = (props) => {
+    const propsClone = {
+        ...props,
+        items: props.items.filter(item => !hiddenItems.includes(item.key))
+    }
+    return (
+        <ScrollView>
+            <DrawerItems {...propsClone} />
+        </ScrollView>
+    )
+}
 const Splash = {
     screen: SplashScreen,
     navigationOptions: {
@@ -33,9 +59,19 @@ const Post = {
         drawerLabel: 'Post'
     }
 }
-const MatchStack = StackNavigator({ Match }, {})
+const MatchStack = StackNavigator({ Match }, {
+    navigationOptions: ({navigation, HeaderProps}) => ({
+        headerLeft: <MenuButton navigate={navigation.navigate}/>,
+        headerStyle: { backgroundColor: "#000"},
+        headerTintColor: "#fff"
+    })
+})
 const RouteConfig = {
-    initialRoute: 'Splash'
+    initialRoute: 'Splash',
+    contentComponent: SideBar,
+    navigationOptions: {
+        gesturesEnabled: false
+    }
 };
 const AppNavigator = DrawerNavigator({
     Splash,
